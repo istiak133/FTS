@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch - CSE 391 Assignment 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSE 391 - JavaScript Programming Assignment</h1>
+        <nav>
+            <a href="index.html" class="nav-btn">Fortune Generator</a>
+            <a href="stopwatch.html" class="nav-btn active">Stopwatch</a>
+            <a href="todo.html" class="nav-btn">To-Do List</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Stopwatch Section -->
+        <section class="task-section">
+            <h2>Stopwatch</h2>
+            <div class="content-container">
+                <div id="stopwatch-display" class="display-box">
+                    <span id="time-display">00:00</span>
+                </div>
+                <div class="control-buttons">
+                    <button id="start-btn" class="control-btn">Start</button>
+                    <button id="stop-btn" class="control-btn">Stop</button>
+                    <button id="reset-btn" class="control-btn">Reset</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CSE 391 Assignment 2 - JavaScript Programming</p>
+    </footer>
+
+    <script src="stopwatch.js"></script>
+</body>
+</html>

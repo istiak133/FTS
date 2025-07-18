@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - CSE 391 Assignment 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSE 391 - JavaScript Programming Assignment</h1>
+        <nav>
+            <a href="index.html" class="nav-btn">Fortune Generator</a>
+            <a href="stopwatch.html" class="nav-btn">Stopwatch</a>
+            <a href="todo.html" class="nav-btn active">To-Do List</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- To-Do List Section -->
+        <section class="task-section">
+            <h2>To-Do List</h2>
+            <div class="content-container">
+                <div class="todo-input-container">
+                    <input type="text" id="todo-input" placeholder="Enter a new task...">
+                    <button id="add-task-btn" class="control-btn">Add Task</button>
+                </div>
+                <div id="todo-list-container" class="todo-list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CSE 391 Assignment 2 - JavaScript Programming</p>
+    </footer>
+
+    <script src="todo.js"></script>
+</body>
+</html>
