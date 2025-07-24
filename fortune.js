@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // Array of fortune messages (at least 10 as required)
-    const fortunes = [
+    var fortunes = [
         "True wisdom comes not from knowledge, but from understanding.",
         "The journey of a thousand miles begins with a single step.",
         "Your future depends on many things, but mostly on you.",
@@ -20,73 +20,104 @@ document.addEventListener('DOMContentLoaded', function() {
         "The way to get started is to quit talking and begin doing."
     ];
     
-    // Color arrays for styling
-    const fontColors = ['#2c3e50', '#e74c3c', '#8b4513', '#2e8b57', '#4b0082', '#dc143c'];
-    const bgColors = ['#ffffff', '#f0f8ff', '#ffe4e1', '#f0fff0', '#fff8dc', '#e6e6fa'];
-    const borderColors = ['#3498db', '#e74c3c', '#f39c12', '#27ae60', '#9b59b6', '#e67e22'];
-    const fontFamilies = ['Arial', 'Times New Roman', 'Courier New', 'Georgia', 'Verdana', 'Comic Sans MS'];
-    const fontSizes = ['1.2rem', '1.4rem', '1.6rem', '1.8rem', '2rem', '1rem'];
+    // Style combinations for each button (each button changes all 4 properties)
+    var styleOptions = [
+        {
+            fontColor: '#d8c8c6ff',
+            backgroundColor: '#e74c3c',
+            borderColor: '#3498db',
+            fontFamily: 'Times New Roman',
+            fontSize: '1.4rem'
+        },
+        {
+            fontColor: '#3498db',
+            backgroundColor: '#f0f8ff',
+            borderColor: '#3498db',
+            fontFamily: 'Georgia',
+            fontSize: '1.6rem'
+        },
+        {
+            fontColor: '#27ae60',
+            backgroundColor: '#f0fff0',
+            borderColor: '#27ae60',
+            fontFamily: 'Courier New',
+            fontSize: '1.2rem'
+        },
+        {
+            fontColor: '#9b59b6',
+            backgroundColor: '#e6e6fa',
+            borderColor: '#9b59b6',
+            fontFamily: 'Verdana',
+            fontSize: '1.8rem'
+        }
+    ];
     
     // Get DOM elements
-    const fortuneText = document.getElementById('fortune-text');
-    const fortuneBox = document.getElementById('fortune-box');
-    const fontColorBtn = document.getElementById('font-color-btn');
-    const bgColorBtn = document.getElementById('bg-color-btn');
-    const borderColorBtn = document.getElementById('border-color-btn');
-    const fontStyleBtn = document.getElementById('font-style-btn');
+    var fortuneText = document.getElementById('fortune-text');
+    var fortuneBox = document.getElementById('fortune-box');
+    var styleBtn1 = document.getElementById('style-btn-1');
+    var styleBtn2 = document.getElementById('style-btn-2');
+    var styleBtn3 = document.getElementById('style-btn-3');
+    var styleBtn4 = document.getElementById('style-btn-4');
     
     // Function to get random fortune
     function getRandomFortune() {
-        const randomIndex = Math.floor(Math.random() * fortunes.length);
+        var randomIndex = Math.floor(Math.random() * fortunes.length);
         return fortunes[randomIndex];
-    }
-    
-    // Function to get random element from array
-    function getRandomElement(array) {
-        return array[Math.floor(Math.random() * array.length)];
     }
     
     // Display random fortune on page load
     function displayRandomFortune() {
-        const randomFortune = getRandomFortune();
+        var randomFortune = getRandomFortune();
         fortuneText.textContent = randomFortune;
         console.log('Random fortune displayed:', randomFortune);
     }
     
+    // Function to apply style (changes all 4 properties at once)
+    function applyStyle(styleIndex) {
+        var style = styleOptions[styleIndex];
+        
+        // Change font color
+        fortuneText.style.color = style.fontColor;
+        
+        // Change background color
+        fortuneBox.style.backgroundColor = style.backgroundColor;
+        
+        // Change border color
+        fortuneBox.style.borderColor = style.borderColor;
+        
+        // Change font family and size
+        fortuneText.style.fontFamily = style.fontFamily;
+        fortuneText.style.fontSize = style.fontSize;
+        
+        console.log('Style ' + (styleIndex + 1) + ' applied:');
+        console.log('Font Color:', style.fontColor);
+        console.log('Background Color:', style.backgroundColor);
+        console.log('Border Color:', style.borderColor);
+        console.log('Font Family:', style.fontFamily);
+        console.log('Font Size:', style.fontSize);
+    }
+    
     // Event listeners for style buttons
-    fontColorBtn.addEventListener('click', function() {
-        const randomColor = getRandomElement(fontColors);
-        fortuneText.style.color = randomColor;
-        console.log('Font color changed to:', randomColor);
+    styleBtn1.addEventListener('click', function() {
+        applyStyle(0);
     });
     
-    bgColorBtn.addEventListener('click', function() {
-        const randomBgColor = getRandomElement(bgColors);
-        fortuneBox.style.backgroundColor = randomBgColor;
-        console.log('Background color changed to:', randomBgColor);
+    styleBtn2.addEventListener('click', function() {
+        applyStyle(1);
     });
     
-    borderColorBtn.addEventListener('click', function() {
-        const randomBorderColor = getRandomElement(borderColors);
-        fortuneBox.style.borderColor = randomBorderColor;
-        console.log('Border color changed to:', randomBorderColor);
+    styleBtn3.addEventListener('click', function() {
+        applyStyle(2);
     });
     
-    fontStyleBtn.addEventListener('click', function() {
-        const randomFamily = getRandomElement(fontFamilies);
-        const randomSize = getRandomElement(fontSizes);
-        fortuneText.style.fontFamily = randomFamily;
-        fortuneText.style.fontSize = randomSize;
-        console.log('Font style changed to:', randomFamily, 'with size:', randomSize);
-    });
-    
-    // Add click event to fortune box to generate new fortune
-    fortuneBox.addEventListener('click', function() {
-        displayRandomFortune();
+    styleBtn4.addEventListener('click', function() {
+        applyStyle(3);
     });
     
     // Initialize fortune generator
     displayRandomFortune();
     
     console.log('Fortune Generator initialized with', fortunes.length, 'fortunes');
+    console.log('Each button will change all 4 properties: font color, background color, border color, and font style');
 });

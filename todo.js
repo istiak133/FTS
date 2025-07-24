@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const deletedTask = tasks.splice(taskIndex, 1)[0];
             saveTasks();
             renderTasks();
+            
             console.log('Task deleted:', deletedTask);
         }
     }

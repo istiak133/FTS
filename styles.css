@@ -38,18 +38,13 @@ nav {
 .nav-btn {
     background-color: #34495e;
     color: white;
-    border: none;
+    text-decoration: none;
     padding: 0.75rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
     transition: all 0s ease;
 }
-
-/* .nav-btn:hover {
-    background-color: #4a6074;
-    transform: translateY(-1px);
-} */
 
 .nav-btn.active {
     background-color: #3498db;
@@ -82,27 +77,27 @@ main {
     font-size: 2rem;
 }
 
-.content-container {
+/* Fortune Generator Styles - Updated to place buttons beside the box */
+.fortune-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 2rem;
     padding: 2rem 1rem;
     width: 100%;
+    margin-bottom: 100px; /* Space above footer */
 }
 
-/* Fortune Generator Styles */
 .fortune-box {
     background-color: white;
     border: 3px solid #3498db;
     border-radius: 10px;
     padding: 2rem;
     max-width: 500px;
-    width: 100%;
+    width: 400px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: all 0s ease;
-    margin: 2rem auto;
 }
 
 #fortune-text {
@@ -115,26 +110,40 @@ main {
 
 .control-buttons {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    border-radius: 0; 
 }
 
 .style-btn {
-    background-color: #e74c3c;
     color: white;
     border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 5px;
+    padding: 0.95rem 1rem;
+    /* border-radius: 5px; */
     cursor: pointer;
     font-size: 0.9rem;
     transition: all 0s ease;
+    width: 120px;
+    border-radius: 0; 
 }
 
-/* .style-btn:hover {
-    background-color: #c0392b;
-    transform: translateY(-1px);
-} */
+/* Individual button colors matching fortune box backgrounds */
+#style-btn-1 {
+    background-color: #e74c3c; /* Matches red text style */
+    border-radius: 0; 
+}
+
+#style-btn-2 {
+    background-color: #3498db; /* Matches blue text style */
+}
+
+#style-btn-3 {
+    background-color: #27ae60; /* Matches green text style */
+}
+
+#style-btn-4 {
+    background-color: #9b59b6; /* Matches purple text style */
+}
 
 /* Stopwatch Styles */
 .display-box {
@@ -164,28 +173,24 @@ main {
     transition: all 0s ease;
 }
 
-/* .control-btn:hover {
-    background-color: #219a52;
-    transform: translateY(-2px);
-} */
-
 .control-btn:nth-child(2) {
     background-color: #e67e22;
-}
-
-.control-btn:nth-child(2):hover {
-    background-color: #d35400;
 }
 
 .control-btn:nth-child(3) {
     background-color: #e74c3c;
 }
 
-/* .control-btn:nth-child(3):hover {
-    background-color: #c0392b;
-} */
-
 /* To-Do List Styles */
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
 .todo-input-container {
     display: flex;
     gap: 1rem;
@@ -239,6 +244,7 @@ main {
 
 .todo-item.completed .todo-text {
     text-decoration: line-through;
+    font-weight: bold;
 }
 
 .todo-checkbox {
@@ -292,9 +298,15 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .control-buttons {
+    .fortune-container {
         flex-direction: column;
-        align-items: center;
+        gap: 1rem;
+    }
+    
+    .control-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .todo-input-container {
@@ -311,5 +323,7 @@ footer {
     
     .fortune-box {
         margin: 0 1rem;
+        width: 100%;
+        max-width: 400px;
     }
 }

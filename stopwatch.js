@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetBtn = document.getElementById('reset-btn');
     
     // Stopwatch variables
-    let currentTime = 0; // Time in seconds
+    let currentTime = 0; 
     let intervalId = null;
     let isRunning = false;
     
@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to start stopwatch
     function startStopwatch() {
         if (isRunning) return;
+        if (!isRunning) {
+            
+            resetStopwatch()
+
+        } 
         
         isRunning = true;
         startBtn.disabled = true;
@@ -47,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             console.log('Time updated:', currentTime, 'seconds');
-        }, 3000); // Update every 3 seconds (3000 milliseconds)
+        }, 1000); // Update every 3 seconds (3000 milliseconds)
         
         console.log('Stopwatch started');
     }
