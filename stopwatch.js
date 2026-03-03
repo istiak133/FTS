@@ -39,8 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         intervalId = setInterval(function () {
             currentTime += INCREMENT;
             updateDisplay();
-            
-            alert('Stopwatch stopped! Press Start to run another 30 seconds.');
+
 
             // Stop automatically at maxTime
             if (currentTime >= maxTime) {
@@ -53,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
         console.log('Stopwatch started');
     }
+    alert('Stopwatch stopped! Press Start to run another 30 seconds.');
 
     // Function to stop stopwatch
     function stopStopwatch() {
