@@ -18,6 +18,7 @@ function showTasks() {
     list.innerHTML = '';
 
     for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].hidden) continue;  // hidden task skip koro, dekhabe na
         list.innerHTML = list.innerHTML +
             '<div class="todo-item ' + (tasks[i].done ? 'completed' : '') + '">' +
                 '<input type="checkbox" class="todo-checkbox" onclick="toggleDone(' + i + ')" ' + (tasks[i].done ? 'checked' : '') + '>' +
@@ -48,8 +49,9 @@ function deleteTask(i) {
 }
 
 function toggleDone(i) {
-    var item = document.getElementsByClassName('todo-item');
-    item[i].style.display = 'none';
+    tasks[i].hidden = true;                                   // task e hidden flag boshao
+    localStorage.setItem('todoTasks', JSON.stringify(tasks));  // save koro
+    showTasks();                                               // screen update koro
 }
 
 // --- Add button click ---
