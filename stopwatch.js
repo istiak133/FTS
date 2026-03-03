@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Constants
     const INCREMENT = 3; // Increment by 3 seconds
-    const MAX_TIME = 30; // Maximum time in seconds
+    let maxTime = 30; // Maximum time in seconds (changes after each run)
 
     // Function to format time display
     function formatTime(seconds) {
@@ -40,10 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
             currentTime += INCREMENT;
             updateDisplay();
 
-            // Stop automatically at 30 seconds
-            if (currentTime >= MAX_TIME) {
+            // Stop automatically at maxTime
+            if (currentTime >= maxTime) {
                 stopStopwatch();
-                alert('Stopwatch reached maximum time of 30 seconds!');
+                maxTime = currentTime + 30;
+                alert('Stopwatch stopped! Press Start to run another 30 seconds.');
             }
 
             console.log('Time updated:', currentTime, 'seconds');
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetStopwatch() {
         stopStopwatch();
         currentTime = 0;
+        maxTime = 30;
         updateDisplay();
 
         // Reset button states

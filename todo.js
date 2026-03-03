@@ -47,11 +47,10 @@ function deleteTask(i) {
     showTasks();
 }
 
-// --- Task complete/uncomplete koro ---
+// --- Checkbox click korle frontend theke hide koro ---
 function toggleDone(i) {
-    tasks[i].done = !tasks[i].done;
-    localStorage.setItem('todoTasks', JSON.stringify(tasks));
-    showTasks();
+    var allItems = document.getElementsByClassName('todo-item');
+    allItems[i].style.display = 'none';
 }
 
 // --- Add button click ---
