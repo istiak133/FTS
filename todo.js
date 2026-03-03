@@ -1,148 +1,102 @@
-// To-Do List functionality with localStorage
+// ============ TO-DO LIST ============
+
+// Step 1: HTML load howar por code chalao
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // Get DOM elements
-    const todoInput = document.getElementById('todo-input');
-    const addTaskBtn = document.getElementById('add-task-btn');
-    const todoListContainer = document.getElementById('todo-list-container');
-    
-    // Tasks array to store all tasks
-    let tasks = [];
-    
-    // Load tasks from localStorage on page load
-    function loadTasks() {
-        const savedTasks = localStorage.getItem('todoTasks');
-        if (savedTasks) {
-            tasks = JSON.parse(savedTasks);
-            console.log('Loaded tasks from localStorage:', tasks);
-        }
-    }
-    
-    // Save tasks to localStorage
-    function saveTasks() {
-        localStorage.setItem('todoTasks', JSON.stringify(tasks));
-        console.log('Tasks saved to localStorage:', tasks);
-    }
-    
-    // Generate unique ID for each task
-    function generateTaskId() {
-        return 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    }
-    
-    // Create task HTML element
-    function createTaskElement(task) {
-        const taskDiv = document.createElement('div');
-        taskDiv.className = 'todo-item';
-        taskDiv.dataset.taskId = task.id;
-        
-        if (task.completed) {
-            taskDiv.classList.add('completed');
-        }
-        
-        taskDiv.innerHTML = `
-            <input type="checkbox" class="todo-checkbox" ${task.completed ? 'checked' : ''}>
-            <span class="todo-text">${task.text}</span>
-            <button class="delete-btn">Delete</button>
-        `;
-        
-        return taskDiv;
-    }
-    
-    // Render all tasks
-    function renderTasks() {
-        todoListContainer.innerHTML = '';
-        
+
+    // Step 2: HTML er element gula dhoro
+    var input = document.getElementById('todo-input');        // input box
+    var addBtn = document.getElementById('add-task-btn');     // add button
+    var list = document.getElementById('todo-list-container'); // jekhane task dekhabe
+
+    // Step 3: LocalStorage theke age save kora tasks load koro
+    var tasks = JSON.parse(localStorage.getItem('todoTasks')) || [];
+
+    // Step 4: Screen e tasks dekhano
+    function showTasks() {
+        list.innerHTML = '';  // age screen muchi
+
+        // kono task na thakle message dekhao
         if (tasks.length === 0) {
-            todoListContainer.innerHTML = '<p style="text-align: center; padding: 2rem; color: #7f8c8d;">No tasks yet. Add your first task above!</p>';
+            list.innerHTML = '<p style="text-align:center; padding:2rem; color:#7f8c8d;">No tasks yet!</p>';
             return;
         }
-        
-        tasks.forEach(task => {
-            const taskElement = createTaskElement(task);
-            todoListContainer.appendChild(taskElement);
-        });
-        
-        console.log('Tasks rendered:', tasks.length, 'tasks');
+
+        // prottek ta task er jonno HTML banao
+        for (var i = 0; i < tasks.length; i++) {
+
+            var div = document.createElement('div');
+            div.className = 'todo-item';
+
+            // task complete hole completed class add koro
+            if (tasks[i].done) {
+                div.className = 'todo-item completed';
+            }
+
+            // div er index rakhchi - pore delete/toggle e lagbe
+            div.setAttribute('data-index', i);
+
+            // div er bhitor checkbox + text + delete button
+            div.innerHTML =
+                '<input type="checkbox" class="todo-checkbox" ' + (tasks[i].done ? 'checked' : '') + '>' +
+                '<span class="todo-text">' + tasks[i].text + '</span>' +
+                '<button class="delete-btn">Delete</button>';
+
+            list.appendChild(div);
+        }
     }
-    
-    // Add new task
-    function addTask() {
-        const taskText = todoInput.value.trim();
-        
-        if (taskText === '') {
+
+    // Step 5: LocalStorage e save koro
+    function save() {
+        localStorage.setItem('todoTasks', JSON.stringify(tasks));
+    }
+
+    // Step 6: Add button e click korle task add hobe
+    addBtn.addEventListener('click', function() {
+        var text = input.value.trim();  // input box er text nao
+
+        if (text === '') {              // khali hole alert dao
             alert('Please enter a task!');
             return;
         }
-        
-        const newTask = {
-            id: generateTaskId(),
-            text: taskText,
-            completed: false,
-            createdAt: new Date().toISOString()
-        };
-        
-        tasks.push(newTask);
-        saveTasks();
-        renderTasks();
-        
-        // Clear input field
-        todoInput.value = '';
-        
-        console.log('Task added:', newTask);
-    }
-    
-    // Delete task
-    function deleteTask(taskId) {
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
-        if (taskIndex !== -1) {
-            const deletedTask = tasks.splice(taskIndex, 1)[0];
-            saveTasks();
-            renderTasks();
-            
-            console.log('Task deleted:', deletedTask);
-        }
-    }
-    
-    // Toggle task completion
-    function toggleTask(taskId) {
-        const task = tasks.find(task => task.id === taskId);
-        if (task) {
-            task.completed = !task.completed;
-            saveTasks();
-            renderTasks();
-            console.log('Task toggled:', task);
-        }
-    }
-    
-    // Event listeners
-    addTaskBtn.addEventListener('click', addTask);
-    
-    // Allow Enter key to add task
-    todoInput.addEventListener('keypress', function(e) {
+
+        tasks.push({ text: text, done: false });  // array te task rakhcho
+        save();       // localStorage e save
+        showTasks();  // screen update
+        input.value = '';  // input box khali koro
+    });
+
+    // Step 7: Enter key diyeo task add kora jay
+    input.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            addTask();
+            addBtn.click();  // enter chaple add button er click fire koro
         }
     });
-    
-    // Event delegation for dynamically created elements
-    todoListContainer.addEventListener('click', function(e) {
-        const taskItem = e.target.closest('.todo-item');
-        if (!taskItem) return;
-        
-        const taskId = taskItem.dataset.taskId;
-        
+
+    // Step 8: Checkbox click = complete/uncomplete, Delete click = muchi
+    list.addEventListener('click', function(e) {
+
+        // kothay click hoyeche? - sei task er div khujho
+        var taskDiv = e.target.closest('.todo-item');
+        if (!taskDiv) return;  // task er upor click na hole kichui korona
+
+        // sei task er index number nao
+        var index = Number(taskDiv.getAttribute('data-index'));
+
+        // DELETE button e click?
         if (e.target.classList.contains('delete-btn')) {
-            if (confirm('Are you sure you want to delete this task?')) {
-                deleteTask(taskId);
-            }
-        } else if (e.target.classList.contains('todo-checkbox')) {
-            toggleTask(taskId);
+            tasks.splice(index, 1);  // array theke sei index er task bair koro
+            save();
+            showTasks();
+        }
+
+        // CHECKBOX e click?
+        if (e.target.classList.contains('todo-checkbox')) {
+            tasks[index].done = !tasks[index].done;  // true hole false, false hole true
+            save();
+            showTasks();
         }
     });
-    
-    // Initialize to-do list
-    loadTasks();
-    renderTasks();
-    
-    console.log('To-Do List initialized with localStorage support');
+
+    // Step 9: Page load hole tasks dekhao
+    showTasks();
 });
