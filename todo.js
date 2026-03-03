@@ -18,7 +18,7 @@ function showTasks() {
     list.innerHTML = '';
 
     for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].hidden) continue;  // hidden task skip koro, dekhabe na
+        if (tasks[i].hidden) continue; 
         list.innerHTML = list.innerHTML +
             '<div class="todo-item ' + (tasks[i].done ? 'completed' : '') + '">' +
                 '<input type="checkbox" class="todo-checkbox" onclick="toggleDone(' + i + ')" ' + (tasks[i].done ? 'checked' : '') + '>' +
