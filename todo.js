@@ -5,10 +5,8 @@ var input = document.getElementById('todo-input');
 var addBtn = document.getElementById('add-task-btn');
 var list = document.getElementById('todo-list-container');
 
-// --- Task gula rakhbar array ---
 var tasks = [];
 
-// --- Page load hole localStorage theke tasks ano ---
 if (localStorage.getItem('todoTasks')) {
     tasks = JSON.parse(localStorage.getItem('todoTasks'));
 }
@@ -28,7 +26,6 @@ function showTasks() {
     }
 }
 
-// --- Task add koro ---
 function addTask() {
     var text = input.value.trim();
     if (text === '') {
@@ -41,7 +38,6 @@ function addTask() {
     input.value = '';
 }
 
-// --- Task delete koro ---
 function deleteTask(i) {
     tasks.splice(i, 1);
     localStorage.setItem('todoTasks', JSON.stringify(tasks));
@@ -49,15 +45,13 @@ function deleteTask(i) {
 }
 
 function toggleDone(i) {
-    tasks[i].hidden = true;                                   // task e hidden flag boshao
-    localStorage.setItem('todoTasks', JSON.stringify(tasks));  // save koro
-    showTasks();                                               // screen update koro
+    tasks[i].hidden = true;                                   
+    localStorage.setItem('todoTasks', JSON.stringify(tasks));  
+    showTasks();                                               
 }
 
-// --- Add button click ---
 addBtn.onclick = function() {
     addTask();
 };
 
-// --- Shuru te tasks dekhao ---
 showTasks();
