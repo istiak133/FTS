@@ -59,12 +59,5 @@ addBtn.onclick = function() {
     addTask();
 };
 
-// --- Enter key press ---
-input.onkeypress = function(e) {
-    if (e.key === 'Enter') {
-        addTask();
-    }
-};
-
 // --- Shuru te tasks dekhao ---
 showTasks();
