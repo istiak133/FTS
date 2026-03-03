@@ -47,10 +47,9 @@ function deleteTask(i) {
     showTasks();
 }
 
-// --- Checkbox click korle frontend theke hide koro ---
 function toggleDone(i) {
-    var allItems = document.getElementsByClassName('todo-item');
-    allItems[i].style.display = 'none';
+    var item = document.getElementsByClassName('todo-item');
+    item[i].style.display = 'none';
 }
 
 // --- Add button click ---
